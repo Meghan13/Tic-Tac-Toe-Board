@@ -1,31 +1,36 @@
 import sys
 
 #The board locations
-theBoard = {'top-L': ' ', 'top-M': ' ', 'top-R': ' ',
-            'mid-L': ' ', 'mid-M': ' ', 'mid-R': ' ',
-            'low-L': ' ', 'low-M': ' ', 'low-R': ' '}
+# theBoard = {'top-L': ' ', 'top-M': ' ', 'top-R': ' ',
+#             'mid-L': ' ', 'mid-M': ' ', 'mid-R': ' ',
+#             'low-L': ' ', 'low-M': ' ', 'low-R': ' '}
+blankSpot = ' '
+theBoard = {1: blankSpot, 2: blankSpot, 3: blankSpot,
+            4: blankSpot, 5: blankSpot, 6: blankSpot,
+            7: blankSpot, 8: blankSpot, 9: blankSpot}
 moves = {1,2,3,4,5,6,7,8,9}
-key = ' '
+avalibleMoves = {}
+
 #Visual display of the board
 def printBoard(board):
-    print(board['top-L'] + '|' + board['top-M'] + '|' + board['top-R'])
+    print(board[1] + '|' + board[2] + '|' + board[3])
     print('-+-+-')
-    print(board['mid-L'] + '|' + board['mid-M'] + '|' + board['mid-R'])
+    print(board[4] + '|' + board[5] + '|' + board[6])
     print('-+-+-')
-    print(board['low-L'] + '|' + board['low-M'] + '|' + board['low-R'])
+    print(board[7] + '|' + board[8] + '|' + board[9])
 printBoard(theBoard)
 
-def avalibleMoves(board, key):
+def getAvalibleMoves(board, key):
 	theBoard = board
 	for i in theBoard.keys():
 		if key in theBoard.keys():
-			theBoard[i] = moves
+			avalibleMoves.append(moves[theBoard[i]]) #theBoard[i] = moves
 
-	print(theBoard)
+	print(avalibleMoves)
 
 #Player move information
 Player1 = 'X'
 Player2 = 'O'
 
 # while True:
-avalibleMoves(theBoard, key)
+getAvalibleMoves(theBoard, key)
