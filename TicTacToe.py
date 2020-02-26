@@ -1,4 +1,4 @@
-import sys
+import random, sys
 
 #The board locations
 # theBoard = {'top-L': ' ', 'top-M': ' ', 'top-R': ' ',
@@ -9,7 +9,6 @@ theBoard = {1: blankSpot, 2: blankSpot, 3: blankSpot,
             4: blankSpot, 5: blankSpot, 6: blankSpot,
             7: blankSpot, 8: blankSpot, 9: blankSpot}
 keyList = list(theBoard.keys())
-avalibleMoves = {}
 
 #Visual display of the board
 #1:top-L, 2:top-M, 3:top-R
@@ -21,20 +20,42 @@ def printBoard(board):
     print(board[4] + '|' + board[5] + '|' + board[6])
     print('-+-+-')
     print(board[7] + '|' + board[8] + '|' + board[9])
-printBoard(theBoard)
+# printBoard(theBoard)
 
-#fill avalible spot keys into avalibleMoves and print
-def getAvalibleMoves(board):
+#fill available spot keys into avalibleMoves and print
+def getAvailableMoves(board):
 	theBoard = board
-	for i in theBoard.keys():
-		if blankSpot in theBoard.values():
-			avalibleMoves = keyList.index(i)
+	avalibleMoves = []
 
-	print(avalibleMoves)
+	for i in range(1,len(board)+1):
+		if blankSpot == theBoard[i]:
+			avalibleMoves.append(i)
+	print("It is " + currentPlayer + "'s turn, Please pick a space. The available moves are: " + str(avalibleMoves)+ ":")
 
 #Player move information
-Player1 = 'X'
-Player2 = 'O'
+player1 = 'X'
+player2 = 'O'
+currentPlayer = ''
 
-# while True:
-getAvalibleMoves(theBoard)
+#Starts the game
+print("Welcome to Tic-Tac-Toe! \nPress ENTER to Flip Coin to decide if X or O goes first! Or Press (q) quit.")
+start = input()
+if start == 'q':
+	sys.exit()
+#Randomly picks starting player
+randomNumber = random.randint(1,2)
+if randomNumber == 1:
+	currentPlayer = player1
+else:
+	currentPlayer = player2
+printBoard(theBoard)
+print("Player " + currentPlayer + " goes first!\n")
+getAvailableMoves(theBoard)
+
+
+move = int(input())
+theBoard[move] = currentPlayer 
+
+getAvailableMoves(theBoard)
+printBoard(theBoard)
+
