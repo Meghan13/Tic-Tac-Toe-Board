@@ -8,10 +8,13 @@ blankSpot = ' '
 theBoard = {1: blankSpot, 2: blankSpot, 3: blankSpot,
             4: blankSpot, 5: blankSpot, 6: blankSpot,
             7: blankSpot, 8: blankSpot, 9: blankSpot}
-moves = {1,2,3,4,5,6,7,8,9}
+keyList = list(theBoard.keys())
 avalibleMoves = {}
 
 #Visual display of the board
+#1:top-L, 2:top-M, 3:top-R
+#4:mid-L, 5:mid-M, 6:mid-R
+#7:low-L, 8:low-M, 9:low-R
 def printBoard(board):
     print(board[1] + '|' + board[2] + '|' + board[3])
     print('-+-+-')
@@ -20,11 +23,12 @@ def printBoard(board):
     print(board[7] + '|' + board[8] + '|' + board[9])
 printBoard(theBoard)
 
-def getAvalibleMoves(board, key):
+#fill avalible spot keys into avalibleMoves and print
+def getAvalibleMoves(board):
 	theBoard = board
 	for i in theBoard.keys():
-		if key in theBoard.keys():
-			avalibleMoves.append(moves[theBoard[i]]) #theBoard[i] = moves
+		if blankSpot in theBoard.values():
+			avalibleMoves = keyList.index(i)
 
 	print(avalibleMoves)
 
@@ -33,4 +37,4 @@ Player1 = 'X'
 Player2 = 'O'
 
 # while True:
-getAvalibleMoves(theBoard, key)
+getAvalibleMoves(theBoard)
