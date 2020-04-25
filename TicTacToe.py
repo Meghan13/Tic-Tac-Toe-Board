@@ -30,11 +30,18 @@ def getAvailableMoves(board):
 	for i in range(1,len(board)+1):
 		if blankSpot == theBoard[i]:
 			avalibleMoves.append(i)
+	return avalibleMoves
+
+def printAvalibleMoves(avalibleMoves):
+	avalibleMoves = getAvailableMoves(avalibleMoves)
+	if len(avalibleMoves) == 0:
+		print("There are no more avalible moves!")
 	print("It is " + currentPlayer + "'s turn, Please pick a space. The available moves are: " + str(avalibleMoves)+ ":")
 
 #Player move information
-player1 = 'X'
-player2 = 'O'
+players = ['X','O']
+# player1 = 'X'
+# player2 = 'O'
 currentPlayer = ''
 
 #Starts the game
@@ -42,20 +49,29 @@ print("Welcome to Tic-Tac-Toe! \nPress ENTER to Flip Coin to decide if X or O go
 start = input()
 if start == 'q':
 	sys.exit()
+
 #Randomly picks starting player
 randomNumber = random.randint(1,2)
 if randomNumber == 1:
-	currentPlayer = player1
+	currentPlayer = players[0]
 else:
-	currentPlayer = player2
-printBoard(theBoard)
-print("Player " + currentPlayer + " goes first!\n")
-getAvailableMoves(theBoard)
+	currentPlayer = players[1]
+
+#Runs the game till end or quit
+while len(getAvailableMoves(theBoard)) != 0:
+	print("Player " + currentPlayer + " goes first!\n")
+	printBoard(theBoard)
+	getAvailableMoves(theBoard)
+	printAvalibleMoves(theBoard)
 
 
-move = int(input())
-theBoard[move] = currentPlayer 
+	move = int(input())
+	theBoard[move] = currentPlayer 
+	if currentPlayer == players[0]:
+		currentPlayer = players[1]
+	else:
+		currentPlayer = players[0]
 
-getAvailableMoves(theBoard)
-printBoard(theBoard)
+	getAvailableMoves(theBoard)
+	printBoard(theBoard)
 
